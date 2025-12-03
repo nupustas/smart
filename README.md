@@ -9,13 +9,13 @@
 * Diplomai ir pažymėjimai gali būti klastojami
 * Darbdaviai priversti rankiniu būdu tikrinti dokumentus
 * Universitetai patiria didelę administracinę naštą
-* Duomenys saugomi centralizuotai, todėl pažeidžiami
+* Duomenys saugomi centralizuotai, todėl gali būti pažeidžiami
 
 ##### Blockchain sprendimas leidžia:
-* Užtikrinti duomenų nekintamumą.
-* Leisti bet kam patikrinti diplomų autentiškumą.
-* Sumažinti biurokratiją.
-* Padidinti pasitikėjimą tarp visų šalių.
+* Užtikrinti duomenų nekintamumą
+* Užtikrinti diplomų patikrą decentralizuotu būdu be tarpininkų
+* Sumažinti biurokratiją
+* Padidinti pasitikėjimą tarp visų šalių
 
 
 ---
@@ -133,4 +133,38 @@ Visi įrašai:
 
 ### Verslo modelio sekų diagrama
 
-![sequence diagrama](img/image.png)
+![sequence diagrama](img/image.png "Sekų diagrama")
+
+---
+
+### Sekos veiksmų aprašymas
+
+1. **Universiteto registracija**  
+   Universitetas įdiegia ir užregistruoja savo adresą išmaniojoje sutartyje. Nuo šio momento jis turi teisę tvirtinti studentus ir išduoti diplomus.
+
+2. **Studento įregistravimas**  
+   Universitetas įtraukia studentą į studijų programą. Studentas tampa oficialiu sistemos dalyviu.
+
+3. **Pažymių įvedimas**  
+   Dėstytojas suveda studento kurso rezultatą. Išmanioji sutartis patikrina dėstytojo teises ir išsaugo pažymį.
+
+4. **Kreditų patvirtinimas**  
+   Universitetas patikrina, ar studentas surinko reikiamą kreditų skaičių studijų programai baigti.
+
+5. **Diplomo išdavimas**  
+   Universitetas iškviečia diplomo išdavimo funkciją. Išmanioji sutartis sukuria skaitmeninį diplomą ir priskiria jį studentui.
+
+6. **Prieigos suteikimas darbdaviui**  
+   Studentas suteikia darbdaviui teisę peržiūrėti savo diplomą ir kvalifikacijas.
+
+7. **Diplomo patikra**  
+   Darbdavys patikrina, ar diplomas yra galiojantis ir išduotas registruoto universiteto.
+
+8. **Diplomo atšaukimas**  
+   Universitetas, esant teisėtam pagrindui, atšaukia diplomą (pvz., dėl nustatyto sukčiavimo).
+
+9. **Pakartotinė patikra po atšaukimo**  
+   Darbdavys pakartotinai tikrina diplomą ir gauna informaciją, kad diplomas nebegalioja.
+
+10. **Procesas uždaromas**  
+    Išmanioji sutartis užfiksuoja galutinę diplomo būseną blokų grandinėje.
