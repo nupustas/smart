@@ -30,7 +30,7 @@ Sistema veikia kaip decentralizuotas akademinių kvalifikacijų registras, kuria
 
 Visi įrašai:
 * Yra laiko žymėti
-* Yra viešai patikrinami
+* Yra patikrinami
 * Negali būti pakeisti ar ištrinti
 * Yra pasiekiami tik su atitinkamomis teisėmis
 
@@ -163,8 +163,27 @@ Visi įrašai:
 8. **Diplomo atšaukimas**  
    Universitetas, esant teisėtam pagrindui, atšaukia diplomą (pvz., dėl nustatyto sukčiavimo).
 
+
 9. **Pakartotinė patikra po atšaukimo**  
    Darbdavys pakartotinai tikrina diplomą ir gauna informaciją, kad diplomas nebegalioja.
 
 10. **Procesas uždaromas**  
     Išmanioji sutartis užfiksuoja galutinę diplomo būseną blokų grandinėje.
+
+
+
+### Testavimas Ethereum lokaliame tinkle
+* 2_deploy.js failas
+* truffle-config.js failas
+#### Paleidimas ir testavimas
+* 
+`` 
+truffle compile
+truffle migrate --network development
+``
+
+``
+truffle console --network development
+
+
+``
