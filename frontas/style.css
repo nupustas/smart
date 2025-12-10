@@ -1,70 +1,143 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px auto;
-  max-width: 800px;
-  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  background: #0f172a;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #e5e7eb;
+}
+
+.app {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 16px 40px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 h1 {
-  text-align: center;
+  font-size: 1.8rem;
+  color: #f9fafb;
 }
 
-.section {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 6px;
+.card {
+  background: #111827;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  border: 1px solid #1f2937;
 }
 
-.section h3 {
+h2 {
   margin-top: 0;
+  font-size: 1.2rem;
+}
+
+h3 {
+  margin-bottom: 6px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+label {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-bottom: 2px;
 }
 
 input {
-  width: 100%;
-  padding: 8px;
-  margin: 6px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.9rem;
 }
 
-button {
-  padding: 8px 12px;
-  background: #4CAF50;
-  color: white;
+input::placeholder {
+  color: #6b7280;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 999px;
   border: none;
-  border-radius: 4px;
+  background: #1d4ed8;
+  color: #e5e7eb;
+  font-size: 0.9rem;
   cursor: pointer;
+  margin-top: 4px;
+  transition: transform 0.05s ease, box-shadow 0.1s ease, background 0.1s ease;
 }
 
-button:disabled {
-  background: #999;
-  cursor: not-allowed;
+.btn:hover {
+  background: #2563eb;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
 }
 
-#accountInfo {
-  padding: 12px;
-  background: #f0f0f0;
-  border-radius: 6px;
-  margin-bottom: 20px;
+.btn.primary {
+  background: #22c55e;
 }
 
-.roleBadge {
-  display: inline-block;
-  padding: 3px 8px;
-  background: #007bff;
-  color: white;
-  border-radius: 4px;
-  margin-left: 10px;
-  font-size: 0.85em;
+.btn.primary:hover {
+  background: #16a34a;
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.25);
 }
 
-#eventLogs {
-  background: black;
-  color: #00ff00;
+.btn.danger {
+  background: #b91c1c;
+}
+
+.btn.danger:hover {
+  background: #dc2626;
+  box-shadow: 0 6px 14px rgba(220, 38, 38, 0.25);
+}
+
+pre {
+  background: #020617;
+  border-radius: 10px;
   padding: 10px;
-  min-height: 80px;
-  border-radius: 6px;
-  overflow: auto;
-  font-family: monospace;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  border: 1px solid #111827;
+}
+
+#status {
+  font-size: 0.85rem;
+  color: #facc15;
+}
+
+#role {
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
 }

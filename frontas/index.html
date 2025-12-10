@@ -1,52 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Diploma Verification DApp</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/web3@1.9.0/dist/web3.min.js"></script>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="app">
+    <header>
+      <h1>Diploma Verification DApp</h1>
+      <button id="btnConnect" class="btn primary">Connect MetaMask</button>
+    </header>
 
-  <h1>Diploma Verification DApp</h1>
+    <section class="card">
+      <h2>Wallet</h2>
+      <pre id="walletInfo">Wallet: -  
+Balance: -</pre>
+      <p id="role">Role: -</p>
+      <p id="status">Status: Not connected.</p>
+    </section>
 
-  <div id="accountInfo">
-    Wallet: <span id="account">Not connected</span>
-    <span id="roleBadge" class="roleBadge" style="display:none;"></span>
-    <br>
-    Balance: <span id="balance">0</span> ETH
+    <!-- UNIVERSITY SECTION -->
+    <section class="card" id="sectionUniversity">
+      <h2>University panel</h2>
+      <p class="hint">This section is available only when you are logged in as the university address.</p>
+
+      <div class="field">
+        <label for="uniName">University name</label>
+        <input type="text" id="uniName" placeholder="e.g., Vilnius University" />
+      </div>
+      <button id="btnRegisterUniversity" class="btn">Register University</button>
+
+      <hr />
+
+      <div class="field">
+        <label for="studentAddress">Enroll student (wallet address)</label>
+        <input type="text" id="studentAddress" placeholder="0x..." />
+      </div>
+      <button id="btnEnrollStudent" class="btn">Enroll Student</button>
+
+      <hr />
+
+      <h3>Submit grade</h3>
+      <div class="field">
+        <label for="gradeStudent">Student address</label>
+        <input type="text" id="gradeStudent" placeholder="0x..." />
+      </div>
+      <div class="field">
+        <label for="courseName">Course name</label>
+        <input type="text" id="courseName" placeholder="Blockchain 101" />
+      </div>
+      <div class="field">
+        <label for="courseCredits">Credits</label>
+        <input type="number" id="courseCredits" placeholder="60" />
+      </div>
+      <button id="btnSubmitGrade" class="btn">Submit grade</button>
+
+      <hr />
+
+      <h3>Issue / revoke diploma</h3>
+      <div class="field">
+        <label for="issueStudent">Issue diploma to student</label>
+        <input type="text" id="issueStudent" placeholder="0x..." />
+      </div>
+      <button id="btnIssueDiploma" class="btn">Issue diploma</button>
+
+      <div class="field">
+        <label for="revokeStudent">Revoke diploma from student</label>
+        <input type="text" id="revokeStudent" placeholder="0x..." />
+      </div>
+      <button id="btnRevokeDiploma" class="btn danger">Revoke diploma</button>
+    </section>
+
+    <!-- STUDENT SECTION -->
+    <section class="card" id="sectionStudent">
+      <h2>Student panel</h2>
+      <p class="hint">Available when logged in as student address.</p>
+
+      <h3>Grant access to employer</h3>
+      <div class="field">
+        <label for="employerAddress">Employer address</label>
+        <input type="text" id="employerAddress" placeholder="0x..." />
+      </div>
+      <button id="btnGrantAccess" class="btn">Grant access</button>
+
+      <h3>My info</h3>
+      <div class="field">
+        <label for="infoStudent">Student address (you)</label>
+        <input type="text" id="infoStudent" placeholder="0x..." />
+      </div>
+      <button id="btnLoadStudent" class="btn">Load student info</button>
+      <pre id="studentInfo"></pre>
+    </section>
+
+    <!-- EMPLOYER SECTION -->
+    <section class="card" id="sectionEmployer">
+      <h2>Employer panel</h2>
+      <p class="hint">Available when logged in as employer address.</p>
+
+      <h3>Verify diploma</h3>
+      <div class="field">
+        <label for="verifyStudent">Student address</label>
+        <input type="text" id="verifyStudent" placeholder="0x..." />
+      </div>
+      <button id="btnVerifyDiploma" class="btn">Verify diploma</button>
+      <pre id="verifyResult"></pre>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="card">
+      <h2>Event logs (on-chain)</h2>
+      <pre id="eventLogs"></pre>
+    </section>
   </div>
 
-  <div class="section">
-    <h3>1. Register University</h3>
-    <input id="uniName" placeholder="University Name">
-    <button id="btnRegister" onclick="registerUniversity()">Register</button>
-  </div>
-
-  <div class="section">
-    <h3>2. Enroll Student</h3>
-    <input id="studentAddress" placeholder="Student Address">
-    <button id="btnEnroll" onclick="enrollStudent()">Enroll</button>
-  </div>
-
-  <div class="section">
-    <h3>3. Issue Diploma</h3>
-    <input id="studentDiploma" placeholder="Student Address">
-    <button id="btnIssue" onclick="issueDiploma()">Issue Diploma</button>
-  </div>
-
-  <div class="section">
-    <h3>4. Verify Diploma</h3>
-    <input id="verifyStudent" placeholder="Student Address">
-    <button id="btnVerify" onclick="verifyDiploma()">Verify</button>
-    <pre id="verifyResult"></pre>
-  </div>
-
-  <div class="section">
-    <h3>Event Logs</h3>
-    <pre id="eventLogs"></pre>
-  </div>
-
-<script src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
