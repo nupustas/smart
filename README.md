@@ -187,16 +187,26 @@ truffle migrate --network development
 ``
 truffle test
 ``
-![local test](img/testas.png "local test")
+![local test](img/local1.png "local test")
+![local test](img/local2.png "local test")
+![local test](img/local3.png "local test")
 
 ### Testavimas Sepolia tinkle
 
-1. Sukonfigūravau MetaMask piniginę ir prijungiau ją prie Sepolia testinio tinklo.  
-2. Gavau testinį ETH iš Sepolia faucet. (iš ``https://sepolia-faucet.pk910.de/#/``)  
-3. Sukonfigūravau `truffle-config.js` su Alchemy ir MetaMask mnemonika.  
-4. Deploy’inau išmaniąją sutartį į Sepolia tinklą `truffle migrate --network sepolia`.  
-5. Paleidau testavimą `node test/sepolia_test.js`.  
-6. Patikrinau transakcijas ir įvykių (event) logus Sepolia Etherscan svetainėje.
+1. Sukonfigūravau MetaMask piniginę ir prijungiau ją prie Sepolia testinio tinklo  
+2. Gavau test ETH iš Sepolia faucet (iš ``https://sepolia-faucet.pk910.de/#/``)  
+3. Sukonfigūravau `truffle-config.js` su Alchemy ir MetaMask mnemonika  
+4. Deploy’inau išmaniąją sutartį į Sepolia tinklą `truffle migrate --network sepolia` 
+5. Paleidau testavimą `node test/sepolia_test.js` 
+6. Patikrinau transakcijas ir event logus Etherscan svetainėje
 
+---
+
+### Paleidimas
+* ``truffle migrate --network sepolia``
+* ``truffle exec test/sepolia_test.js --network sepolia``
+
+![sepolia](img/sepolia1.png "sepolia")
+![sepolia](img/sepoliatest.png "sepolia")
 ![etherscan](img/etherscan.png "etherscan")
 ![etherscan](img/etherscanEv.png "etherscan events")

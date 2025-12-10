@@ -76,7 +76,7 @@ module.exports = async function (callback) {
 
     callback();
   } catch (err) {
-    console.error("❌ TEST FAILED:", err);
+    console.error("TEST FAILED:", err);
     callback(err);
   }
 };

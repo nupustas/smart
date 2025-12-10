@@ -2,7 +2,8 @@ let web3;
 let contract;
 let account;
 
-// ABI iš Truffle build
+const contractAddress = "0xB2061de97432Ae887c4A9E44876973db4f7E8810"; 
+
 const contractABI = [
     {
       "inputs": [],
@@ -378,46 +379,73 @@ const contractABI = [
       "type": "function"
     }
   ];
-const contractAddress = "0xB2061de97432Ae887c4A9E44876973db4f7E8810"; // deployed contract address
 
-window.addEventListener('load', async () => {
-    if (window.ethereum) {
+    async function init() {
+      if (window.ethereum) {
         web3 = new Web3(window.ethereum);
-
-        document.getElementById('connectWallet').onclick = async () => {
-            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            account = accounts[0];
-            document.getElementById('account').innerText = "Connected: " + account;
-
-            contract = new web3.eth.Contract(contractABI, contractAddress);
-        };
-    } else {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await web3.eth.getAccounts();
+        account = accounts[0];
+        document.getElementById('account').innerText = "Connected: " + account;
+        contract = new web3.eth.Contract(contractABI, contractAddress);
+        subscribeEvents();
+      } else {
         alert("MetaMask not detected!");
+      }
     }
 
-    // Register university
-    document.getElementById('registerUniversity').onclick = async () => {
-        const name = document.getElementById('uniName').value;
-        await contract.methods.registerUniversity(name).send({ from: account });
-        alert("University registered!");
-    };
+    async function registerUniversity() {
+      const name = document.getElementById("uniName").value;
+      try {
+        const tx = await contract.methods.registerUniversity(name).send({ from: account });
+        console.log("University registered:", tx);
+        alert("University registered! Check Etherscan for tx: " + tx.transactionHash);
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
-    // Enroll student
-    document.getElementById('enrollStudent').onclick = async () => {
-        const student = document.getElementById('studentAddress').value;
-        await contract.methods.enrollStudent(student).send({ from: account });
-        alert("Student enrolled!");
-    };
+    async function enrollStudent() {
+      const student = document.getElementById("studentAddress").value;
+      try {
+        const tx = await contract.methods.enrollStudent(student).send({ from: account });
+        console.log("Student enrolled:", tx);
+        alert("Student enrolled! Check Etherscan for tx: " + tx.transactionHash);
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
-    // Verify diploma
-    document.getElementById('verifyDiploma').onclick = async () => {
-        const student = document.getElementById('verifyAddress').value;
-        try {
-            const result = await contract.methods.verifyDiploma(student).call({ from: account });
-            document.getElementById('verificationResult').innerText = 
-                `Valid: ${result.valid}, University: ${result.university}, Issued: ${new Date(result.issueDate*1000)}`;
-        } catch(err) {
-            alert("Access denied or invalid student");
-        }
-    };
-});
+    async function issueDiploma() {
+      const student = document.getElementById("studentDiploma").value;
+      try {
+        const tx = await contract.methods.issueDiploma(student).send({ from: account });
+        console.log("Diploma issued:", tx);
+        alert("Diploma issued! Check Etherscan for tx: " + tx.transactionHash);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function verifyDiploma() {
+      const student = document.getElementById("verifyStudent").value;
+      try {
+        const result = await contract.methods.verifyDiploma(student).call({ from: account });
+        document.getElementById("verifyResult").innerText =
+          `Valid: ${result.valid}\nUniversity: ${result.university}\nIssued: ${new Date(result.issueDate * 1000)}`;
+      } catch (err) {
+        console.error(err);
+        document.getElementById("verifyResult").innerText = "Error: " + err.message;
+      }
+    }
+
+    function subscribeEvents() {
+      contract.events.allEvents({ fromBlock: 0 })
+      .on('data', event => {
+        const logs = document.getElementById("eventLogs");
+        logs.textContent += JSON.stringify(event, null, 2) + "\n";
+      })
+      .on('error', console.error);
+    }
+
+    window.addEventListener('load', init);
