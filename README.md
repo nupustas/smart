@@ -133,7 +133,7 @@ Visi įrašai:
 
 ### Verslo modelio sekų diagrama
 
-![sequence diagrama](img/image.png "Sekų diagrama")
+![sequence diagrama](img/diagrama.png "Sekų diagrama")
 
 ---
 
@@ -170,12 +170,12 @@ Visi įrašai:
 10. **Procesas uždaromas**  
     Išmanioji sutartis užfiksuoja galutinę diplomo būseną blokų grandinėje.
 
-
+---
 
 ### Testavimas Ethereum lokaliame tinkle
-* 2_deploy.js failas
-* truffle-config.js failas
-#### Paleidimas ir testavimas
+* `2_deploy.js` - faile apibrėžiama, kaip ir kurios išmaniosios sutartys diegiamos
+* ``truffle-config.js` - konfigūruoja patį Truffle, tinklo nustatymus, pinigines
+#### Paleidimas ir testavimas lokaliame tinkle
 * 
 `` 
 truffle compile
@@ -183,7 +183,18 @@ truffle migrate --network development
 ``
 
 ``
-truffle console --network development
-
-
+truffle test
 ``
+![local test](img/testas.png "local test")
+
+### Testavimas Sepolia tinkle
+
+1. Sukonfigūravau MetaMask piniginę ir prijungiau ją prie Sepolia testinio tinklo.  
+2. Gavau testinį ETH iš Sepolia faucet. (`)  
+3. Sukonfigūravau `truffle-config.js` su Alchemy ir MetaMask mnemonika.  
+4. Deploy’inau išmaniąją sutartį į Sepolia tinklą `truffle migrate --network sepolia`.  
+5. Paleidau testavimą `node test/sepolia_test.js`.  
+6. Patikrinau transakcijas ir įvykių (event) logus Sepolia Etherscan svetainėje.
+
+![etherscan](img/etherscan.png "etherscan")
+![etherscan](img/etherscanEv.png "etherscan events")
