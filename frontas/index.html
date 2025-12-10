@@ -4,42 +4,42 @@
   <meta charset="UTF-8">
   <title>Diploma Verification DApp</title>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.9.0/dist/web3.min.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    input, button { margin: 5px 0; }
-    .section { border: 1px solid #ddd; padding: 10px; margin-bottom: 15px; }
-    .section h3 { margin-top: 0; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <h1>Diploma Verification DApp</h1>
 
-  <div id="account">Not connected</div>
+  <div id="accountInfo">
+    Wallet: <span id="account">Not connected</span>
+    <span id="roleBadge" class="roleBadge" style="display:none;"></span>
+    <br>
+    Balance: <span id="balance">0</span> ETH
+  </div>
 
   <div class="section">
     <h3>1. Register University</h3>
-    <input type="text" id="uniName" placeholder="University Name">
-    <button onclick="registerUniversity()">Register</button>
+    <input id="uniName" placeholder="University Name">
+    <button id="btnRegister" onclick="registerUniversity()">Register</button>
   </div>
 
   <div class="section">
     <h3>2. Enroll Student</h3>
-    <input type="text" id="studentAddress" placeholder="Student Address">
-    <button onclick="enrollStudent()">Enroll</button>
+    <input id="studentAddress" placeholder="Student Address">
+    <button id="btnEnroll" onclick="enrollStudent()">Enroll</button>
   </div>
 
   <div class="section">
     <h3>3. Issue Diploma</h3>
-    <input type="text" id="studentDiploma" placeholder="Student Address">
-    <button onclick="issueDiploma()">Issue Diploma</button>
+    <input id="studentDiploma" placeholder="Student Address">
+    <button id="btnIssue" onclick="issueDiploma()">Issue Diploma</button>
   </div>
 
   <div class="section">
     <h3>4. Verify Diploma</h3>
-    <input type="text" id="verifyStudent" placeholder="Student Address">
-    <button onclick="verifyDiploma()">Verify</button>
-    <div id="verifyResult"></div>
+    <input id="verifyStudent" placeholder="Student Address">
+    <button id="btnVerify" onclick="verifyDiploma()">Verify</button>
+    <pre id="verifyResult"></pre>
   </div>
 
   <div class="section">
@@ -48,6 +48,5 @@
   </div>
 
 <script src="main.js"></script>
-
 </body>
 </html>

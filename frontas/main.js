@@ -2,7 +2,7 @@ let web3;
 let contract;
 let account;
 
-const contractAddress = "0xB2061de97432Ae887c4A9E44876973db4f7E8810"; 
+const contractAddress = "0x3966325230b48b195AD2E0B49279e714D313b2de"; 
 
 const contractABI = [
     {
@@ -380,72 +380,110 @@ const contractABI = [
     }
   ];
 
-    async function init() {
-      if (window.ethereum) {
-        web3 = new Web3(window.ethereum);
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const accounts = await web3.eth.getAccounts();
-        account = accounts[0];
-        document.getElementById('account').innerText = "Connected: " + account;
-        contract = new web3.eth.Contract(contractABI, contractAddress);
-        subscribeEvents();
-      } else {
-        alert("MetaMask not detected!");
-      }
-    }
+async function init() {
+  if (!window.ethereum) {
+    alert("MetaMask not detected!");
+    return;
+  }
 
-    async function registerUniversity() {
-      const name = document.getElementById("uniName").value;
-      try {
-        const tx = await contract.methods.registerUniversity(name).send({ from: account });
-        console.log("University registered:", tx);
-        alert("University registered! Check Etherscan for tx: " + tx.transactionHash);
-      } catch (err) {
-        console.error(err);
-      }
-    }
+  web3 = new Web3(window.ethereum);
+  const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+  account = accounts[0];
 
-    async function enrollStudent() {
-      const student = document.getElementById("studentAddress").value;
-      try {
-        const tx = await contract.methods.enrollStudent(student).send({ from: account });
-        console.log("Student enrolled:", tx);
-        alert("Student enrolled! Check Etherscan for tx: " + tx.transactionHash);
-      } catch (err) {
-        console.error(err);
-      }
-    }
+  contract = new web3.eth.Contract(contractABI, contractAddress);
 
-    async function issueDiploma() {
-      const student = document.getElementById("studentDiploma").value;
-      try {
-        const tx = await contract.methods.issueDiploma(student).send({ from: account });
-        console.log("Diploma issued:", tx);
-        alert("Diploma issued! Check Etherscan for tx: " + tx.transactionHash);
-      } catch (err) {
-        console.error(err);
-      }
-    }
+  document.getElementById("account").innerText = account;
+  updateBalance();
+  detectRole();
+}
 
-    async function verifyDiploma() {
-      const student = document.getElementById("verifyStudent").value;
-      try {
-        const result = await contract.methods.verifyDiploma(student).call({ from: account });
-        document.getElementById("verifyResult").innerText =
-          `Valid: ${result.valid}\nUniversity: ${result.university}\nIssued: ${new Date(result.issueDate * 1000)}`;
-      } catch (err) {
-        console.error(err);
-        document.getElementById("verifyResult").innerText = "Error: " + err.message;
-      }
-    }
+async function updateBalance() {
+  const balWei = await web3.eth.getBalance(account);
+  const balEth = web3.utils.fromWei(balWei, "ether");
+  document.getElementById("balance").innerText = Number(balEth).toFixed(4);
+}
 
-    function subscribeEvents() {
-      contract.events.allEvents({ fromBlock: 0 })
-      .on('data', event => {
-        const logs = document.getElementById("eventLogs");
-        logs.textContent += JSON.stringify(event, null, 2) + "\n";
-      })
-      .on('error', console.error);
-    }
+async function detectRole() {
+  let role = "Unregistered User";
+  let isUniversity = false;
+  let isStudent = false;
 
-    window.addEventListener('load', init);
+  const uni = await contract.methods.universities(account).call();
+  if (uni.isRegistered) {
+    role = "University";
+    isUniversity = true;
+  }
+
+  const student = await contract.methods.students(account).call();
+  if (student.isEnrolled) {
+    role = "Student";
+    isStudent = true;
+  }
+
+  // Show role
+  const badge = document.getElementById("roleBadge");
+  badge.style.display = "inline-block";
+  badge.innerText = role;
+
+  // Adjust permissions
+  document.getElementById("btnRegister").disabled = !(!isUniversity);
+  document.getElementById("btnEnroll").disabled = !isUniversity;
+  document.getElementById("btnIssue").disabled = !isUniversity;
+}
+
+function logEvent(msg) {
+  const el = document.getElementById("eventLogs");
+  el.textContent += msg + "\n";
+  el.scrollTop = el.scrollHeight;
+}
+
+// CONTRACT CALLS
+
+async function registerUniversity() {
+  const name = document.getElementById("uniName").value;
+
+  const tx = await contract.methods
+    .registerUniversity(name)
+    .send({ from: account });
+
+  logEvent("UniversityRegistered tx: " + tx.transactionHash);
+  detectRole();
+}
+
+async function enrollStudent() {
+  const student = document.getElementById("studentAddress").value;
+
+  const tx = await contract.methods
+    .enrollStudent(student)
+    .send({ from: account });
+
+  logEvent("StudentEnrolled tx: " + tx.transactionHash);
+}
+
+async function issueDiploma() {
+  const student = document.getElementById("studentDiploma").value;
+
+  const tx = await contract.methods
+    .issueDiploma(student)
+    .send({ from: account });
+
+  logEvent("DiplomaIssued tx: " + tx.transactionHash);
+}
+
+async function verifyDiploma() {
+  const student = document.getElementById("verifyStudent").value;
+
+  try {
+    const d = await contract.methods
+      .verifyDiploma(student)
+      .call({ from: account });
+
+    document.getElementById("verifyResult").textContent =
+      `Valid: ${d.valid}\nUniversity: ${d.university}\nDate: ${new Date(d.issueDate * 1000).toLocaleString()}`;
+
+  } catch (err) {
+    document.getElementById("verifyResult").textContent = "ACCESS DENIED";
+  }
+}
+
+window.addEventListener("load", init);

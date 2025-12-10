@@ -191,6 +191,8 @@ truffle test
 ![local test](img/local2.png "local test")
 ![local test](img/local3.png "local test")
 
+---
+
 ### Testavimas Sepolia tinkle
 
 1. Sukonfigūravau MetaMask piniginę ir prijungiau ją prie Sepolia testinio tinklo  
@@ -200,13 +202,11 @@ truffle test
 5. Paleidau testavimą `node test/sepolia_test.js` 
 6. Patikrinau transakcijas ir event logus Etherscan svetainėje
 
----
-
 ### Paleidimas
 * ``truffle migrate --network sepolia``
 * ``truffle exec test/sepolia_test.js --network sepolia``
 
 ![sepolia](img/sepolia1.png "sepolia")
-![sepolia](img/sepoliatest.png "sepolia")
+![sepolia](img/sepoliaTest.png "sepolia")
 ![etherscan](img/etherscan.png "etherscan")
 ![etherscan](img/etherscanEv.png "etherscan events")
