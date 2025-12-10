@@ -192,7 +192,7 @@ truffle test
 ### Testavimas Sepolia tinkle
 
 1. Sukonfigūravau MetaMask piniginę ir prijungiau ją prie Sepolia testinio tinklo.  
-2. Gavau testinį ETH iš Sepolia faucet. (`)  
+2. Gavau testinį ETH iš Sepolia faucet. (iš ``https://sepolia-faucet.pk910.de/#/``)  
 3. Sukonfigūravau `truffle-config.js` su Alchemy ir MetaMask mnemonika.  
 4. Deploy’inau išmaniąją sutartį į Sepolia tinklą `truffle migrate --network sepolia`.  
 5. Paleidau testavimą `node test/sepolia_test.js`.  
