@@ -180,17 +180,11 @@ Visi įrašai:
 ### Testavimas Ethereum lokaliame tinkle
 * ``2_deploy.js`` - faile apibrėžiama, kaip ir kurios išmaniosios sutartys diegiamos
 * ``truffle-config.js`` - konfigūruoja patį Truffle, tinklo nustatymus, pinigines
-#### Paleidimas ir testavimas lokaliame tinkle
-`` 
-* truffle compile
-``
-``
-* truffle migrate --network development
-``
+#### Paleidimas ir testavimas lokaliame tinkle 
+* ``truffle compile``
+* `truffle migrate --network development`
+* `truffle test`
 
-``
-* truffle test
-``
 ![local test](img/local1.png "local test")
 ![local test](img/local2.png "local test")
 ![local test](img/local3.png "local test")
