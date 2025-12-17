@@ -18,7 +18,7 @@ module.exports = {
         new HDWalletProvider({
           mnemonic: { phrase: mnemonic },
           providerOrUrl: alchemyURL,
-          numberOfAddresses: 3, // owner, student, employer
+          numberOfAddresses: 7, // 
         }),
       network_id: 11155111,
       gas: 5500000,
