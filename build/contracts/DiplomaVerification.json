@@ -16879,12 +16879,12 @@
     "11155111": {
       "events": {},
       "links": {},
-      "address": "0xF0b206ca4A37304E0649A1D6f2bd3299FEC405A5",
-      "transactionHash": "0x99559433aed9a201b43aa22ba2b7090ec4ca221dbd276fccf2c510427006b262"
+      "address": "0x5869DEe3e69122686A772a37c4d2c6AbB5334C5d",
+      "transactionHash": "0x2730d283f26cd44c40eba89145677ac9feb8e6f5e68152548da9d9945fbd6a05"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-12-17T14:02:02.178Z",
+  "updatedAt": "2025-12-17T18:51:26.257Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
